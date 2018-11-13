@@ -1,3 +1,50 @@
-<p>
-  login works!
-</p>
+<!-- body-content -->
+<div class="container">
+  <!-- login form -->
+  <div class="container login-form">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center margin-bottom-button">LOGIN</h3>
+
+        <!-- alert -->
+        <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{errorMsg}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group input-group mb-2 margin-top-16">
+            <input type="email"  [class.is-invalid]="loginForm.get('email').invalid && loginForm.get('email').touched" formControlName="email" class="form-control" placeholder="Email" />
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+            </div>
+            <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="invalid-feedback">
+              <div *ngIf="loginForm.get('email').errors?.required">Email is required</div>
+              <div *ngIf="loginForm.get('email').errors?.email">Email is invalid</div>
+            </div>
+          </div>
+          <div class="form-group input-group mb-2">
+            <input [class.is-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched" formControlName="password" type="password" class="form-control" placeholder="Password" />
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></div>
+            </div>
+            <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="invalid-feedback">
+              <div *ngIf="loginForm.get('password').errors?.required">
+                Password is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group margin-top-button">
+            <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary form-control">Login</button>
+          </div>
+        </form>
+        {{loginForm.value | json}}
+        {{ errorMsg }}
+      </div>
+    </div>
+
+
+  </div>
+</div>

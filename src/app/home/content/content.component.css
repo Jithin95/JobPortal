@@ -1,0 +1,39 @@
+.job-block {
+  background-color: #fff;
+  font-size: 13px;
+}
+
+.job-block-bottom {
+  background-color: #F4F4F4;
+  color: #b6b8ba;
+  padding: 10px 10px;
+}
+
+.highlight-black-text {
+  color: #000;
+}
+
+.highlight-text {
+  color: #999999;
+}
+
+.text-color {
+  color: #b6b8ba;
+}
+
+.text-ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.job-container hr {
+  margin: 0;
+  border: solid #F4F4F4 1px;
+}
+
+.job-container:hover hr {
+  border: solid #343a40 1px;
+}

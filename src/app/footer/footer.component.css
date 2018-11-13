@@ -1,0 +1,33 @@
+footer {
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 20px 0px;
+}
+
+
+/* Ul styles */
+ul {
+  list-style: none;
+}
+ul > li {
+  display: inline;
+  margin-right: 20px;
+}
+/*
+* Icon styles
+*
+* There are styles for icon and everything which are connected with it.
+*/
+.icon {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #f1f1f1;
+  line-height: 52px;
+  text-align: center;
+  background-color: #48a65b;
+}
