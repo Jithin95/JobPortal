@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ValidatorFn, FormGroup } from '@angular/forms';
 import { ApidataService } from '../services/apidata.service'
 import { Router } from "@angular/router";
-// import { PasswordValidator} from '../shared/passwordValidator';
 
 const PasswordValidator: ValidatorFn = (fg: FormGroup) => {
   const password = fg.get('password').value;
