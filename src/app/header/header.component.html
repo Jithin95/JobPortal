@@ -12,11 +12,14 @@
 
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
-        <li class="nav-item">
+        <li *ngIf= "!_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Login <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li *ngIf= "!_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+        </li>
+        <li *ngIf= "_dataservice.loggedIn()" class="nav-item">
+          <a class="nav-link" style= "cursor:pointer" (click)="_dataservice.logoutUser()">Logout</a>
         </li>
       </ul>
     </div>

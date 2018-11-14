@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -16,6 +16,8 @@ import { ContentComponent } from './home/content/content.component';
 
 import { JobdataService } from './services/jobdata.service';
 import { ApidataService } from './services/apidata.service';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
@@ -38,7 +40,13 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [JobdataService, ApidataService],
+  providers: [JobdataService, ApidataService, AuthGuard,
+        {
+            provide : HTTP_INTERCEPTORS,
+            useClass : TokenInterceptorService,
+            multi : true
+        }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

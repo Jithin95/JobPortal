@@ -23,11 +23,12 @@ export class LoginComponent implements OnInit {
   })
 
   ngOnInit() {
-
+      if (this._dataservice.loggedIn()) {
+          this.router.navigate([''])
+      }
   }
 
   onSubmit() {
-
     console.log(this.loginForm.value)
     this._dataservice.loginApi(this.loginForm.value)
     .subscribe(

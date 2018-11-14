@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UserModel } from '../models/joblist_model'
 import { Observable, throwError } from "rxjs";
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ApidataService {
   _login_url:string = this.base_url+"login"
   _register_url:string = this.base_url+"register"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
   loginApi(user):Observable<UserModel> {
     return this.http.post<UserModel>(this._login_url, user).pipe(catchError(this.errorHandler));
@@ -36,5 +37,18 @@ export class ApidataService {
 
   get isLoggedIn() {
       return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus)
+  }
+
+  loggedIn() {
+      return !!localStorage.getItem('token')
+  }
+
+  getToken() {
+      return localStorage.getItem('token')
+  }
+
+  logoutUser() {
+      localStorage.removeItem('token')
+      this.router.navigate(['/login'])
   }
 }
