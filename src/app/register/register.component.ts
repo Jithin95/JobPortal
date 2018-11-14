@@ -1,7 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ValidatorFn, FormGroup } from '@angular/forms';
 import { ApidataService } from '../services/apidata.service'
 import { Router } from "@angular/router";
+// import { PasswordValidator} from '../shared/passwordValidator';
+
+const PasswordValidator: ValidatorFn = (fg: FormGroup) => {
+  const password = fg.get('password').value;
+  const cpassword = fg.get('cpassword').value;
+
+
+  if (password !== cpassword) {
+      return { 'misMatch': true };
+  } else {
+      return null;
+  }
+};
 
 @Component({
   selector: 'app-register',
@@ -17,12 +30,11 @@ export class RegisterComponent implements OnInit {
     username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
-    cpassword: ['', [Validators.required]]
-  })
+    cpassword: ['', [Validators.required]],
+    usertype: ['employer']
+}, {validator : PasswordValidator})
 
   onSubmit() {
-
-    console.log(this.registerForm.value)
     this._dataservice.registerApi(this.registerForm.value)
     .subscribe(
         res=> {console.log(res)
