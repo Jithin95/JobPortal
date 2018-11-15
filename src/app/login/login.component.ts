@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApidataService } from '../services/apidata.service'
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -18,28 +18,43 @@ export class LoginComponent implements OnInit {
   constructor(private _dataservice: ApidataService, private fb: FormBuilder, private router: Router) { }
 
   loginForm = this.fb.group({
-      email:['', [Validators.required, Validators.email]],
-      password:['', [Validators.required]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
   })
 
   ngOnInit() {
-      if (this._dataservice.loggedIn()) {
-          this.router.navigate([''])
-      }
+    if (this._dataservice.loggedIn()) {
+      this.router.navigate([''])
+    }
   }
 
   onSubmit() {
     console.log(this.loginForm.value)
     this._dataservice.loginApi(this.loginForm.value)
-    .subscribe(
-        res=> {console.log(res)
-            localStorage.setItem('token', res.token);
-            this.router.navigate([''])
+      .subscribe(
+        res => {
+          console.log(res)
+          localStorage.setItem('token', res.token);
+          console.log("Token Updated")
+          // check if profile updated
+          this._dataservice.checkProfileUpdated()
+
+            .subscribe((res) => {
+              let jsonObj = JSON.parse(JSON.stringify(res))
+              if (jsonObj.is_profile_updated) {
+                this.router.navigate([''])
+              } else {
+                this.router.navigate(['updateprofile'])
+              }
+            });
+
+
         },
-        err=> { this.errorMsg = err
-            this.loginForm.reset()
+        err => {
+        this.errorMsg = err
+          this.loginForm.reset()
         }
-    )
+      )
   }
 
   // loginUser() {

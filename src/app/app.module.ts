@@ -20,6 +20,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     HomeComponent,
     SidebarComponent,
     ContentComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    UpdateprofileComponent
   ],
   imports: [
     BrowserModule,

@@ -16,3 +16,15 @@ export interface UserModel {
     token:string,
     password:string
 }
+
+export interface UserDetailModel {
+    mobile:string,
+    profile_skills:string[],
+    high_qualification:string,
+    resume:string,
+    c_name:string,
+    c_email:string,
+    designation:string,
+    c_address:string,
+    c_description:string
+}

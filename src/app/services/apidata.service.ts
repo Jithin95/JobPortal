@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { UserModel } from '../models/joblist_model'
+import { UserModel, UserDetailModel } from '../models/joblist_model'
 import { Observable, throwError } from "rxjs";
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -12,8 +12,12 @@ export class ApidataService {
   base_url: string = "http://localhost:3000/api/users/";
   _login_url:string = this.base_url+"login"
   _register_url:string = this.base_url+"register"
+  _update_profile_url:string = this.base_url+"updateprofile"
+  _get_profile_status:string = this.base_url+"profilestatus"
 
   constructor(private http: HttpClient, private router:Router) { }
+
+  // Api Request
 
   loginApi(user):Observable<UserModel> {
     return this.http.post<UserModel>(this._login_url, user).pipe(catchError(this.errorHandler));
@@ -23,20 +27,20 @@ export class ApidataService {
     return this.http.post<UserModel>(this._register_url, user).pipe(catchError(this.errorHandler));
   }
 
+  updateProfileApi(userDetail):Observable<UserDetailModel> {
+    return this.http.post<UserDetailModel>(this._update_profile_url, userDetail).pipe(catchError(this.errorHandler));
+  }
+
+  checkProfileUpdated() {
+     return this.http.get(this._get_profile_status).pipe(catchError(this.errorHandler));
+  }
+
+  // Utilities
+
   errorHandler(error : HttpErrorResponse) {
       console.log("Error handler")
       console.log(error.error.msg)
       return throwError(error.error.msg || "Server Error")
-  }
-
-  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false')
-  setLoggedStatus(value:boolean) {
-      this.loggedInStatus = value
-      localStorage.setItem('loggedIn', 'true')
-  }
-
-  get isLoggedIn() {
-      return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus)
   }
 
   loggedIn() {
@@ -51,4 +55,8 @@ export class ApidataService {
       localStorage.removeItem('token')
       this.router.navigate(['/login'])
   }
+
+
+
+
 }

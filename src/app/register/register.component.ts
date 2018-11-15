@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     this._dataservice.registerApi(this.registerForm.value)
     .subscribe(
         res=> {console.log(res)
-            localStorage.setItem('token', res.token);
+            // localStorage.setItem('token', res.token);
             this.router.navigate(['login'])
         },
         err=> { this.errorMsg = err
