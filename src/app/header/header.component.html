@@ -18,6 +18,9 @@
         <li *ngIf= "!_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
+        <li *ngIf= "_dataservice.getUsertype()" class="nav-item">
+          <a class="nav-link" routerLink="/addjobs" routerLinkActive="active">Add Job</a>
+        </li>
         <li *ngIf= "_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" style= "cursor:pointer" (click)="_dataservice.logoutUser()">Logout</a>
         </li>

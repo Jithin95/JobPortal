@@ -5,6 +5,7 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { UpdateprofileComponent } from "./updateprofile/updateprofile.component";
+import { AddjobComponent } from "./addjob/addjob.component";
 import { PagenotfoundComponent } from "./pagenotfound/pagenotfound.component";
 import { AuthGuard } from './auth.guard';
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'updateprofile', component: UpdateprofileComponent, canActivate: [AuthGuard] },
+  { path: 'addjobs', component: AddjobComponent, canActivate: [AuthGuard] },
   { path: '**', component: PagenotfoundComponent }
 ];
 

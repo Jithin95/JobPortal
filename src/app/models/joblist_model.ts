@@ -14,7 +14,8 @@ export interface UserModel {
     _id:string,
     email:string,
     token:string,
-    password:string
+    password:string,
+    usertype:string
 }
 
 export interface UserDetailModel {

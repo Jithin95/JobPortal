@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
         res => {
           console.log(res)
           localStorage.setItem('token', res.token);
+          localStorage.setItem('usertype', res.usertype);
           console.log("Token Updated")
           // check if profile updated
           this._dataservice.checkProfileUpdated()

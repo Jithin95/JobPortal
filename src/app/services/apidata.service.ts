@@ -14,6 +14,7 @@ export class ApidataService {
   _register_url:string = this.base_url+"register"
   _update_profile_url:string = this.base_url+"updateprofile"
   _get_profile_status:string = this.base_url+"profilestatus"
+  _get_current_user:string = this.base_url+"currentuserdetail"
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -35,6 +36,10 @@ export class ApidataService {
      return this.http.get(this._get_profile_status).pipe(catchError(this.errorHandler));
   }
 
+  getCurrentUser() {
+     return this.http.get(this._get_current_user).pipe(catchError(this.errorHandler));
+  }
+
   // Utilities
 
   errorHandler(error : HttpErrorResponse) {
@@ -54,6 +59,16 @@ export class ApidataService {
   logoutUser() {
       localStorage.removeItem('token')
       this.router.navigate(['/login'])
+  }
+
+  getUsertype() {
+      if (this.loggedIn()) {
+          let isJobSeeker = (localStorage.getItem('usertype') === "jobseeker") ? false : true;
+          return isJobSeeker;
+      } else {
+          return false;
+      }
+
   }
 
 

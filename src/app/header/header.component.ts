@@ -7,8 +7,11 @@ import { ApidataService } from '../services/apidata.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private _dataservice: ApidataService) { }
+    isJobSeeker;
+  constructor(private _dataservice: ApidataService) {
+      this.isJobSeeker = _dataservice.getUsertype()
+      console.log("Job Seeker type "+this.isJobSeeker)
+  }
 
   ngOnInit() {
   }
