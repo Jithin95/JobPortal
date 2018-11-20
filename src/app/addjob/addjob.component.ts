@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { exec, init } from 'pell'
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApidataService } from '../services/apidata.service'
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-addjob',
@@ -7,56 +9,29 @@ import { exec, init } from 'pell'
   styleUrls: ['./addjob.component.css']
 })
 export class AddjobComponent implements OnInit {
-  constructor() { }
+  constructor(private _dataservice: ApidataService, private fb: FormBuilder, private router: Router) { }
+
+    jobAddForm = this.fb.group({
+      jobheading: [''],
+      experience: [''],
+      keyskills: [''],
+      salarypackage: [''],
+      jobDescription: [''],
+    })
 
   ngOnInit() {
   }
 
-  editor = init({
-    element: document.getElementById('editor'),
-    onChange: html => {
-      document.getElementById('html-output').textContent = html
-    },
-    defaultParagraphSeparator: 'p',
-    styleWithCSS: true,
-    actions: [
-      'bold',
-      'underline',
-      {
-        name: 'italic',
-        result: () => exec('italic')
-      },
-      {
-        name: 'backColor',
-        icon: '<div style="background-color:pink;">A</div>',
-        title: 'Highlight Color',
-        result: () => exec('backColor', 'pink')
-      },
-      {
-        name: 'image',
-        result: () => {
-          const url = window.prompt('Enter the image URL')
-          if (url) exec('insertImage', url)
+  onSubmit() {
+    this._dataservice.addJobApi(this.jobAddForm.value)
+      .subscribe(
+        res => {
+          this.router.navigate(['']);
+        },
+        err => {
+        console.log("Error in add Job "+err)
         }
-      },
-      {
-        name: 'link',
-        result: () => {
-          const url = window.prompt('Enter the link URL')
-          if (url) exec('createLink', url)
-        }
-      }
-    ],
-    classes: {
-      actionbar: 'pell-actionbar-custom-name',
-      button: 'pell-button-custom-name',
-      content: 'pell-content-custom-name',
-      selected: 'pell-button-selected-custom-name'
-    }
-  })
-
-  // editor.content<HTMLElement>
-  // To change the editor's content:
-  // editor.content.innerHTML = '<b><u><i>Initial content!</i></u></b>'
+      )
+  }
 
 }

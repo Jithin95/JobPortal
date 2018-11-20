@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobdataService } from '../../services/jobdata.service';
+import { ApidataService } from '../../services/apidata.service'
 import { JobListModel } from '../../models/joblist_model';
 
 @Component({
@@ -8,14 +8,21 @@ import { JobListModel } from '../../models/joblist_model';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  jobItems: JobListModel[];
-  constructor(private _jobdataservice: JobdataService ) { }
+  jobItems: any[];
+  usertype = "";
+  constructor(private _apidataservice: ApidataService ) { }
 
   ngOnInit() {
 
-    this._jobdataservice.getJobPost().subscribe((data) => {
-              console.log("Job List "+ data)
-              this.jobItems = JSON.parse(JSON.stringify(data));
+     if (!this._apidataservice.getUsertype()) {
+         this.usertype = "jobseeker"
+     } else {
+         this.usertype = "employer"
+     }
+     console.log("Usertype "+ this.usertype)
+    this._apidataservice.getJobApi(this.usertype).subscribe((data) => {
+        this.jobItems = JSON.parse(JSON.stringify(data)).jobs
+              console.log("Job List "+ JSON.stringify(this.jobItems))
           });
 
   }

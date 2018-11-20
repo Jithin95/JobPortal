@@ -22,6 +22,7 @@ export class UpdateprofileComponent implements OnInit {
         c_email: [''],
         c_designation: [''],
         c_address: [''],
+        c_location: [''],
         c_description: [''],
       })
 

@@ -18,6 +18,14 @@ export interface UserModel {
     usertype:string
 }
 
+export interface JobModel {
+    jobheading:string,
+    experience:string,
+    keyskills:string,
+    salarypackage:string,
+    jobDescription:string,
+}
+
 export interface UserDetailModel {
     mobile:string,
     profile_skills:string[],
@@ -26,6 +34,7 @@ export interface UserDetailModel {
     c_name:string,
     c_email:string,
     designation:string,
+    c_location:string,
     c_address:string,
     c_description:string
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { UserModel, UserDetailModel } from '../models/joblist_model'
+import { UserModel, UserDetailModel, JobModel } from '../models/joblist_model'
 import { Observable, throwError } from "rxjs";
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -15,6 +15,8 @@ export class ApidataService {
   _update_profile_url:string = this.base_url+"updateprofile"
   _get_profile_status:string = this.base_url+"profilestatus"
   _get_current_user:string = this.base_url+"currentuserdetail"
+  _add_job:string = this.base_url+"addjob"
+  _get_job:string = this.base_url+"getjob"
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -38,6 +40,15 @@ export class ApidataService {
 
   getCurrentUser() {
      return this.http.get(this._get_current_user).pipe(catchError(this.errorHandler));
+  }
+
+  addJobApi(jobs):Observable<JobModel>  {
+     return this.http.post<JobModel>(this._add_job, jobs).pipe(catchError(this.errorHandler));
+  }
+
+  getJobApi(usertype)  {
+      console.log("Usertpe from service"+ usertype)
+     return this.http.post(this._get_job, {usertype: usertype}).pipe(catchError(this.errorHandler));
   }
 
   // Utilities

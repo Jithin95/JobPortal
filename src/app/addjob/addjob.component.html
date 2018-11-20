@@ -3,7 +3,7 @@
     <div class="card-body">
       <h3 class="pt-3 pb-3">Add Job</h3>
 
-      <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="jobAddForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group mb-2">
           <label for="">Job Heading</label>
@@ -12,7 +12,7 @@
 
         <div class="form-group mb-2">
           <label for="">Experience Required</label>
-          <input type="text" class="form-control" formControlName="expreience" />
+          <input type="text" class="form-control" formControlName="experience" />
           <small class="form-text text-muted">
             Experience required in years. (1-3 years)
           </small>
@@ -26,21 +26,24 @@
           </small>
         </div>
 
-        <!-- <div class="form-group mb-2">
+        <div class="form-group mb-2">
+          <label for="">Salary Package</label>
+          <input type="text" class="form-control" formControlName="salarypackage" />
+
+        </div>
+
+        <div class="form-group mb-2">
           <label for="">Job Description</label>
-          <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent" formControlName="jobDescription">
-          </app-ngx-editor>
-        </div> -->
-        <textarea name="content" id="editor">
-        &lt;p&gt;This is some sample content.&lt;/p&gt;
-    </textarea>
+          <textarea  class="form-control" formControlName="jobDescription" rows="8">
+          </textarea>
+        </div>
+
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Add Job</button>
         </div>
       </form>
-
-
+{{jobAddForm.value | json}}
     </div>
   </div>
 </div>
