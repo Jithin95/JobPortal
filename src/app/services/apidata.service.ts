@@ -17,6 +17,7 @@ export class ApidataService {
   _get_current_user:string = this.base_url+"currentuserdetail"
   _add_job:string = this.base_url+"addjob"
   _get_job:string = this.base_url+"getjob"
+  _get_job_detail:string = this.base_url+"getjobdetail"
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -49,6 +50,10 @@ export class ApidataService {
   getJobApi(usertype)  {
       console.log("Usertpe from service"+ usertype)
      return this.http.post(this._get_job, {usertype: usertype}).pipe(catchError(this.errorHandler));
+  }
+
+  getJobDetailApi(id)  {
+     return this.http.post(this._get_job_detail, {jobId: id}).pipe(catchError(this.errorHandler));
   }
 
   // Utilities

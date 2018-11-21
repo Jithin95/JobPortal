@@ -1,0 +1,52 @@
+<div class="mt-3 container">
+  <div class="card">
+    <div class="card-body">
+      <div class="p-3 job-content">
+        <h5 class="highlight-black-text">{{jobData.job.jobheading}}</h5>
+
+        <p class="highlight-text">{{jobData.job.userInfo.other_details.c_name}}</p>
+
+        <div class="row pb-2">
+          <div class="col-md-2">
+            <i class="fa fa-briefcase highlight-text pr-1" aria-hidden="true"></i>
+            <span class="highlight-text"> {{jobData.job.experience}}</span>
+          </div>
+          <div class="col-md-2">
+            <i class="fas fa-dollar-sign highlight-text pr-1" aria-hidden="true"></i>
+            <span class="highlight-text">  {{jobData.job.salarypackage}}</span>
+          </div>
+          <div class="col-md-2">
+            <i class="fa fa-map-marker highlight-text pr-1" aria-hidden="true"></i>
+            <span class="highlight-text"> {{jobData.job.userInfo.other_details.c_location}}</span>
+          </div>
+
+        </div>
+
+        <div class="row p-2">
+          <button class="btn btn-primary" type="button" name="button">Edit Job</button>&nbsp;
+          <button class="btn btn-danger" type="button" name="button">Delete</button>&nbsp;
+        </div>
+
+        <div class="row p-2">
+          <button class="btn btn-primary" type="button" name="button">Apply for this Job</button>&nbsp;
+          <button class="btn btn-success" type="button" name="button">Applied</button>&nbsp;
+        </div>
+
+        <div class="">
+          <p></p>
+          <h6 class="highlight-black-text">Job Description</h6>
+          <p class="highlight-text">{{jobData.job.jobDescription}}</p>
+          <h6 class="highlight-black-text">Key Skills</h6>
+          <p class="highlight-text">{{jobData.job.keyskills}}</p>
+
+          <h6 class="highlight-black-text">Contact Information</h6>
+          <p class="highlight-text">{{jobData.job.userInfo.other_details.designation}}, {{jobData.job.userInfo.username}}, {{jobData.job.userInfo.email}},
+{{jobData.job.userInfo.other_details.c_name}}, {{jobData.job.userInfo.other_details.c_address}} , {{jobData.job.userInfo.other_details.mobile}},
+{{jobData.job.userInfo.other_details.c_email}}
+
+           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApidataService } from '../../services/apidata.service'
 import { JobListModel } from '../../models/joblist_model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-content',
@@ -10,7 +11,7 @@ import { JobListModel } from '../../models/joblist_model';
 export class ContentComponent implements OnInit {
   jobItems: any[];
   usertype = "";
-  constructor(private _apidataservice: ApidataService ) { }
+  constructor(private _apidataservice: ApidataService, private router: Router) { }
 
   ngOnInit() {
 
@@ -25,6 +26,10 @@ export class ContentComponent implements OnInit {
               console.log("Job List "+ JSON.stringify(this.jobItems))
           });
 
+  }
+  
+  clickedItem(id) {
+        this.router.navigate(['job', id])
   }
 
 }

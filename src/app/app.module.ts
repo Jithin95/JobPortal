@@ -22,6 +22,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { AddjobComponent } from './addjob/addjob.component';
+import { JobdetailComponent } from './jobdetail/jobdetail.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AddjobComponent } from './addjob/addjob.component';
     ContentComponent,
     PagenotfoundComponent,
     UpdateprofileComponent,
-    AddjobComponent
+    AddjobComponent,
+    JobdetailComponent
   ],
   imports: [
     BrowserModule,

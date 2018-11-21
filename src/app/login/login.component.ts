@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ApidataService } from '../services/apidata.service'
+import { ApidataService } from '../services/apidata.service';
 import { Router } from "@angular/router";
 
 @Component({
