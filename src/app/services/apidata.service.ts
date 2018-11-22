@@ -18,6 +18,7 @@ export class ApidataService {
   _add_job:string = this.base_url+"addjob"
   _get_job:string = this.base_url+"getjob"
   _get_job_detail:string = this.base_url+"getjobdetail"
+  _update_job_detail:string = this.base_url+"updatejob"
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -54,6 +55,10 @@ export class ApidataService {
 
   getJobDetailApi(id)  {
      return this.http.post(this._get_job_detail, {jobId: id}).pipe(catchError(this.errorHandler));
+  }
+
+  updateJobDetailApi(jobs):Observable<JobModel>  {
+     return this.http.post<JobModel>(this._update_job_detail, jobs).pipe(catchError(this.errorHandler));
   }
 
   // Utilities

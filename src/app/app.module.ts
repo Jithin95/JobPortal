@@ -23,6 +23,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { AddjobComponent } from './addjob/addjob.component';
 import { JobdetailComponent } from './jobdetail/jobdetail.component';
+import { JobupdateComponent } from './jobupdate/jobupdate.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { JobdetailComponent } from './jobdetail/jobdetail.component';
     PagenotfoundComponent,
     UpdateprofileComponent,
     AddjobComponent,
-    JobdetailComponent
+    JobdetailComponent,
+    JobupdateComponent
   ],
   imports: [
     BrowserModule,

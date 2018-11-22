@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { UpdateprofileComponent } from "./updateprofile/updateprofile.component";
 import { AddjobComponent } from "./addjob/addjob.component";
 import { JobdetailComponent } from "./jobdetail/jobdetail.component";
+import { JobupdateComponent } from "./jobupdate/jobupdate.component";
 import { PagenotfoundComponent } from "./pagenotfound/pagenotfound.component";
 import { AuthGuard } from './auth.guard';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'updateprofile', component: UpdateprofileComponent, canActivate: [AuthGuard] },
   { path: 'addjobs', component: AddjobComponent, canActivate: [AuthGuard] },
   { path: 'job/:id', component: JobdetailComponent, canActivate: [AuthGuard] },
+  { path: 'updatejob/:id', component: JobupdateComponent, canActivate: [AuthGuard] },
   { path: '**', component: PagenotfoundComponent }
 ];
 

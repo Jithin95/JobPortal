@@ -1,7 +1,7 @@
 <div class="mt-3 container">
   <div class="card">
     <div class="card-body">
-      <div class="p-3 job-content">
+      <div *ngIf= "jobData" class="p-3 job-content">
         <h5 class="highlight-black-text">{{jobData.job.jobheading}}</h5>
 
         <p class="highlight-text">{{jobData.job.userInfo.other_details.c_name}}</p>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="row p-2">
-          <button class="btn btn-primary" type="button" name="button">Edit Job</button>&nbsp;
+          <button class="btn btn-primary" type="submit" name="button" (click)="editJob(jobData.job._id)">Edit Job</button>&nbsp;
           <button class="btn btn-danger" type="button" name="button">Delete</button>&nbsp;
         </div>
 
