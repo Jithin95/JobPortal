@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'updateprofile', component: UpdateprofileComponent, canActivate: [AuthGuard] },
   { path: 'addjobs', component: AddjobComponent, canActivate: [AuthGuard] },
   { path: 'job/:id', component: JobdetailComponent, canActivate: [AuthGuard] },
-  { path: 'updatejob/:id', component: JobupdateComponent, canActivate: [AuthGuard] },
+  { path: 'job/update/:id', component: JobupdateComponent, canActivate: [AuthGuard] },
   { path: '**', component: PagenotfoundComponent }
 ];
 

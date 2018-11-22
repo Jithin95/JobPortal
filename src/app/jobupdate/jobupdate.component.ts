@@ -17,21 +17,20 @@ export class JobupdateComponent implements OnInit {
 
       this.jobId = this.activeRoute.snapshot.paramMap.get('id');
       this._apidataservice.getJobDetailApi(this.jobId).subscribe((data) => {
-          this.jobData= data;
+          this.jobData= JSON.parse(JSON.stringify(data)).job;
         });
   }
 
-
       jobUpdateForm = this.fb.group({
-        jobheading: [this.jobData.job.jobheading],
-        experience: [this.jobData.job.experience],
-        keyskills: [this.jobData.job.keyskills],
-        salarypackage: [this.jobData.job.salarypackage],
-        jobDescription: [this.jobData.job.jobDescription],
+        jobheading: [''],
+        experience: [''],
+        keyskills: [''],
+        salarypackage: [''],
+        jobDescription: [''],
       })
 
       onSubmit() {
-        this._apidataservice.updateJobDetailApi(this.jobUpdateForm.value)
+        this._apidataservice.updateJobDetailApi(this.jobUpdateForm.value, this.jobId)
           .subscribe(
             res => {
               this.router.navigate(['']);
