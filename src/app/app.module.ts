@@ -39,7 +39,7 @@ import { JobupdateComponent } from './jobupdate/jobupdate.component';
     UpdateprofileComponent,
     AddjobComponent,
     JobdetailComponent,
-    JobupdateComponent
+    JobupdateComponent,
   ],
   imports: [
     BrowserModule,

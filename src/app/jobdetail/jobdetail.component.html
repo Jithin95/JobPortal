@@ -22,14 +22,14 @@
 
         </div>
 
-        <div class="row p-2">
-          <button class="btn btn-primary" type="submit" name="button" (click)="editJob(jobData.job._id)">Edit Job</button>&nbsp;
+        <div *ngIf = "!getUsertype()" class="row p-2">
+          <button class="btn btn-primary" type="button" name="button" (click)="editJob(jobData.job._id)">Edit Job</button>&nbsp;
           <button class="btn btn-danger" type="button" name="button" (click)="deleteMethod(jobData.job._id)">Delete</button>&nbsp;
         </div>
 
-        <div class="row p-2">
-          <button class="btn btn-primary" type="button" name="button">Apply for this Job</button>&nbsp;
-          <button class="btn btn-success" type="button" name="button">Applied</button>&nbsp;
+        <div *ngIf = "getUsertype()" class="row p-2">
+          <button *ngIf="!isApplied" class="btn btn-primary" type="button" name="button" (click)="applyJob(jobData.job._id)">Apply for this Job</button>&nbsp;
+          <button *ngIf="isApplied" class="btn btn-success" type="button" name="button">Applied</button>&nbsp;
         </div>
 
         <div class="">
@@ -46,6 +46,15 @@
 
            </p>
         </div>
+      </div>
+
+      <div class="p-3 job-content" *ngIf = "appliedUser">
+          <ul *ngFor = "let user of appliedUser">
+              <li >
+                {{user.username}}
+                {{user.email}}
+              </li>
+          </ul>
       </div>
     </div>
   </div>

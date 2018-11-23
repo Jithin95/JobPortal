@@ -20,6 +20,9 @@ export class ApidataService {
   _get_job_detail:string = this.base_url+"getjobdetail"
   _update_job_detail:string = this.base_url+"updatejob"
   _delete_job:string = this.base_url+"deletejob"
+  _apply_job:string = this.base_url+"applyjob"
+  _get_applied_job:string = this.base_url+"getappliedjob"
+  _get_applied_job_status:string = this.base_url+"checkappliedjob"
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -66,6 +69,21 @@ export class ApidataService {
   deleteJobApi(id) {
       let passData = {jobId: id}
      return this.http.post(this._delete_job, passData).pipe(catchError(this.errorHandler));
+  }
+
+  applyJobApi(usertype, jobId) {
+      let passData = {usertype: usertype , jobId: jobId}
+     return this.http.post(this._apply_job, passData).pipe(catchError(this.errorHandler));
+  }
+
+  getAppliedJobApi(usertype, jobId) {
+      let passData = {usertype: usertype , jobId: jobId}
+     return this.http.post(this._get_applied_job, passData).pipe(catchError(this.errorHandler));
+  }
+
+  getAppliedJobStatusApi(usertype, jobId) {
+      let passData = {usertype: usertype , jobId: jobId}
+     return this.http.post(this._get_applied_job_status, passData).pipe(catchError(this.errorHandler));
   }
 
   // Utilities
