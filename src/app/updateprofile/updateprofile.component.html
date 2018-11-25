@@ -1,70 +1,87 @@
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)"
+size = "default"
+color = "#fff"
+type = "square-loader"
+></ngx-spinner>
 <div class="container">
   <div class="card">
     <div class="card-body">
       <h3 class="pt-3 pb-3">Update Profile</h3>
-      {{isJobSeeker}}
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
         <div class="form-group mb-2">
           <label for="">Mobile</label>
-          <input type="text" class="form-control" formControlName="mobile" />
+          <input type="text" [class.is-invalid]="profileForm.get('mobile').invalid && profileForm.get('mobile').touched" class="form-control" formControlName="mobile" />
+          <div *ngIf="profileForm.get('mobile').invalid && profileForm.get('mobile').touched" class="invalid-feedback">
+            <div *ngIf="profileForm.get('mobile').errors?.required">Mobile is required</div>
+          </div>
         </div>
 
         <!--  only for jobseeker -->
         <div *ngIf = "isJobSeeker">
             <div class="form-group mb-2">
               <label for="">Highest Qualification</label>
-              <input type="text" class="form-control" formControlName="highest_qualification" />
+              <input type="text" [class.is-invalid]="profileForm.get('highest_qualification').invalid && profileForm.get('highest_qualification').touched" class="form-control" formControlName="highest_qualification" />
+              <div *ngIf="profileForm.get('highest_qualification').invalid && profileForm.get('highest_qualification').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('highest_qualification').errors?.required">Highest Qualification is required</div>
+              </div>
             </div>
-            <!-- <div class="form-group mb-2">
-              <input type="file" class="form-control" (change)= "onFileSelected($event)" formControlName="resume" />
-            </div> -->
         </div>
 
         <!-- only for employer -->
         <div *ngIf = "!isJobSeeker">
             <div class="form-group mb-2">
               <label for="">Company Name</label>
-              <input type="text" class="form-control" formControlName="c_name" />
+              <input type="text" [class.is-invalid]="profileForm.get('c_name').invalid && profileForm.get('c_name').touched" class="form-control" formControlName="c_name" />
+              <div *ngIf="profileForm.get('c_name').invalid && profileForm.get('c_name').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_name').errors?.required">Company Name is required</div>
+              </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="">Company Email</label>
-              <input type="email" class="form-control" formControlName="c_email" />
+              <input type="email" [class.is-invalid]="profileForm.get('c_email').invalid && profileForm.get('c_email').touched" class="form-control" formControlName="c_email" />
+              <div *ngIf="profileForm.get('c_email').invalid && profileForm.get('c_email').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_email').errors?.required">Company Email is required</div>
+              </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="">Designation</label>
-              <input type="text" class="form-control" formControlName="c_designation"/>
+              <input type="text" [class.is-invalid]="profileForm.get('c_designation').invalid && profileForm.get('c_designation').touched" class="form-control" formControlName="c_designation"/>
+              <div *ngIf="profileForm.get('c_designation').invalid && profileForm.get('c_designation').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_designation').errors?.required">Designation is required</div>
+              </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="">Company Address</label>
-              <input type="text" class="form-control" formControlName="c_address"/>
+              <input type="text" [class.is-invalid]="profileForm.get('c_address').invalid && profileForm.get('c_address').touched" class="form-control" formControlName="c_address"/>
+              <div *ngIf="profileForm.get('c_address').invalid && profileForm.get('c_address').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_address').errors?.required">Company Address is required</div>
+              </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="">Company Location</label>
-              <input type="text" class="form-control" formControlName="c_location"/>
+              <input type="text" [class.is-invalid]="profileForm.get('c_location').invalid && profileForm.get('c_location').touched" class="form-control" formControlName="c_location"/>
+              <div *ngIf="profileForm.get('c_location').invalid && profileForm.get('c_location').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_location').errors?.required">Company Location is required</div>
+              </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="">Company Description</label>
-              <input type="text" class="form-control" formControlName="c_description"/>
+              <input type="text" [class.is-invalid]="profileForm.get('c_description').invalid && profileForm.get('c_description').touched" class="form-control" formControlName="c_description"/>
+              <div *ngIf="profileForm.get('c_description').invalid && profileForm.get('c_description').touched" class="invalid-feedback">
+                <div *ngIf="profileForm.get('c_description').errors?.required">Company Description is required</div>
+              </div>
             </div>
         </div>
-
-
-
-
-
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Update Profile</button>
         </div>
-
       </form>
-
-      {{profileForm.value | json}}
     </div>
   </div>
 </div>

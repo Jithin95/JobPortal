@@ -43,7 +43,7 @@
             <span *ngIf="job.salarypackage" class="text-color">{{job.salarypackage}}</span>
           </div>
           <div class="col-md-6 text-right">
-            Posted by <span class="highlight-text">{{job.userInfo.username}}, </span><span>{{job.lastUpdated}}</span>
+            Posted by <span class="highlight-text">{{job.userInfo.username}}, </span><span>{{job.lastUpdated | date: 'dd-MM-yyyy HH:mm aa'}}</span>
           </div>
         </div>
       </div>

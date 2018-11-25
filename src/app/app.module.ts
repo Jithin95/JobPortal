@@ -19,6 +19,8 @@ import { ApidataService } from './services/apidata.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { AddjobComponent } from './addjob/addjob.component';
@@ -46,7 +48,8 @@ import { JobupdateComponent } from './jobupdate/jobupdate.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   providers: [JobdataService, ApidataService, AuthGuard,
         {

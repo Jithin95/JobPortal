@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApidataService } from '../services/apidata.service'
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,21 @@ import { ApidataService } from '../services/apidata.service'
 })
 export class HeaderComponent implements OnInit {
     isJobSeeker;
-  constructor(private _dataservice: ApidataService) {
+    username;
+    current_url;
+  constructor(public _dataservice: ApidataService, private router:Router) {
       this.isJobSeeker = _dataservice.getUsertype()
-      console.log("Job Seeker type "+this.isJobSeeker)
+
+      router.events.subscribe((url:any) => {
+          if (url.url) {
+              this.current_url = url.url;
+          }
+          this.username = this._dataservice.getUsername()
+      });
   }
 
   ngOnInit() {
+
   }
 
 }

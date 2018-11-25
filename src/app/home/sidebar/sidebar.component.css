@@ -1,0 +1,9 @@
+.ads {
+  width: 160px;
+  height: 600px;
+  border: 1px solid #212529;
+  background: #fff;
+  color: #212529;
+  line-height: 600px;
+  text-align: center;
+}

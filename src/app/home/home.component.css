@@ -3,3 +3,13 @@
 
 .sidebar {
 }
+
+.stuck {
+    position: fixed;
+}
+
+@media only screen and (max-width : 766px) {
+    .sidebar {
+        visibility: hidden;
+    }
+}

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApidataService } from '../services/apidata.service';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-login',
@@ -9,61 +11,57 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  // loginForm = new FormGroup({
-  //   email : new FormControl('', [Validators.required, Validators.email]),
-  //   password: new FormControl('', )
-  // })
+    public errorMsg;
+    public registersuccess;
+    constructor(private spinner: NgxSpinnerService,private _dataservice: ApidataService, private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute) { }
 
-  public errorMsg;
-  constructor(private _dataservice: ApidataService, private fb: FormBuilder, private router: Router) { }
+    loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]]
+    })
 
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
-  })
+    ngOnInit() {
+        this.registersuccess = this.activeRoute.snapshot.queryParamMap.get('registersuccess')
+        this.spinner.show();
+        setTimeout(() => {
+            this.spinner.hide();
+        }, 2000);
 
-  ngOnInit() {
-    if (this._dataservice.loggedIn()) {
-      this.router.navigate([''])
-    }
-  }
-
-  onSubmit() {
-    console.log(this.loginForm.value)
-    this._dataservice.loginApi(this.loginForm.value)
-      .subscribe(
-        res => {
-          console.log(res)
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('usertype', res.usertype);
-          console.log("Token Updated")
-          // check if profile updated
-          this._dataservice.checkProfileUpdated()
-
-            .subscribe((res) => {
-              let jsonObj = JSON.parse(JSON.stringify(res))
-              if (jsonObj.is_profile_updated) {
-                this.router.navigate([''])
-              } else {
-                this.router.navigate(['updateprofile'])
-              }
-            });
-
-
-        },
-        err => {
-        this.errorMsg = err
-          this.loginForm.reset()
+        if (this._dataservice.loggedIn()) {
+            this.router.navigate([''])
         }
-      )
-  }
+    }
 
-  // loginUser() {
-  //   this._dataservice.loginApi(this.loginUserData)
-  //   .subscribe(
-  //     res => console.log(res),
-  //     err=> console.log(err)
-  //   )
-  // }
-
+    onSubmit() {
+        this.spinner.show();
+        this._dataservice.loginApi(this.loginForm.value)
+        .subscribe(
+            res => {
+                console.log(res)
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('usertype', res.usertype);
+                localStorage.setItem('username', res.username);
+                // check if profile updated
+                this._dataservice.checkProfileUpdated()
+                .subscribe((res) => {
+                    let jsonObj = JSON.parse(JSON.stringify(res))
+                    if (jsonObj.is_profile_updated) {
+                        this.router.navigate([''])
+                    } else {
+                        this.router.navigate(['updateprofile'])
+                    }
+                });
+                setTimeout(() => {
+                    this.spinner.hide();
+                }, 2000);
+            },
+            err => {
+                setTimeout(() => {
+                    this.spinner.hide();
+                    this.errorMsg = err
+                    this.loginForm.reset()
+                }, 2000);
+            }
+        )
+    }
 }

@@ -15,7 +15,8 @@ export interface UserModel {
     email:string,
     token:string,
     password:string,
-    usertype:string
+    usertype:string,
+    username:string
 }
 
 export interface JobModel {

@@ -104,6 +104,7 @@ export class ApidataService {
 
   logoutUser() {
       localStorage.removeItem('token')
+      localStorage.removeItem('username')
       this.router.navigate(['/login'])
   }
 
@@ -114,7 +115,12 @@ export class ApidataService {
       } else {
           return false;
       }
+  }
 
+  getUsername() {
+      if (this.loggedIn()) {
+          return localStorage.getItem('username');
+      }
   }
 
 

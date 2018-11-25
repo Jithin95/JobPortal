@@ -2,3 +2,12 @@
     background-color: #fff;
     font-size: 13px;
 }
+
+.highlight-black-text {
+  color: #000;
+}
+
+
+.highlight-text {
+  color: #999999;
+}

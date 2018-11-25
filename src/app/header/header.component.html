@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="/">
       Find Jobs
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,18 +12,27 @@
 
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
-        <li *ngIf= "!_dataservice.loggedIn()" class="nav-item">
+        <li *ngIf="!_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Login <span class="sr-only">(current)</span></a>
         </li>
-        <li *ngIf= "!_dataservice.loggedIn()" class="nav-item">
+        <li *ngIf="!_dataservice.loggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
-        <li *ngIf= "_dataservice.getUsertype()" class="nav-item">
-          <a class="nav-link" routerLink="/addjobs" routerLinkActive="active">Add Job</a>
+        <li *ngIf="_dataservice.getUsertype() && current_url !='/updateprofile'" class="nav-item">
+          <a class="nav-link" routerLink="/addjobs" routerLinkActive="active">Add Job </a>
         </li>
-        <li *ngIf= "_dataservice.loggedIn()" class="nav-item">
-          <a class="nav-link" style= "cursor:pointer" (click)="_dataservice.logoutUser()">Logout</a>
+        <li class="nav-item dropdown" *ngIf="_dataservice.loggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{username |titlecase }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" style="cursor:pointer" (click)="_dataservice.logoutUser()">Logout</a>
+          </div>
         </li>
+        <!-- <li  class="nav-item">
+          <a class="nav-link" style="cursor:pointer" (click)="_dataservice.logoutUser()">Logout</a>
+        </li> -->
       </ul>
     </div>
   </div>

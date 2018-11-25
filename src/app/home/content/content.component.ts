@@ -15,21 +15,19 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
 
-     if (!this._apidataservice.getUsertype()) {
-         this.usertype = "jobseeker"
-     } else {
-         this.usertype = "employer"
-     }
-     console.log("Usertype "+ this.usertype)
+    if (!this._apidataservice.getUsertype()) {
+      this.usertype = "jobseeker"
+    } else {
+      this.usertype = "employer"
+    }
     this._apidataservice.getJobApi(this.usertype).subscribe((data) => {
-        this.jobItems = JSON.parse(JSON.stringify(data)).jobs
-              console.log("Job List "+ JSON.stringify(this.jobItems))
-          });
+      this.jobItems = JSON.parse(JSON.stringify(data)).jobs
+    });
 
   }
-  
+
   clickedItem(id) {
-        this.router.navigate(['job', id])
+    this.router.navigate(['job', id])
   }
 
 }

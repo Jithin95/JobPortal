@@ -1,7 +1,7 @@
 <div class="mt-3 container">
   <div class="card">
     <div class="card-body">
-      <div *ngIf= "jobData" class="p-3 job-content">
+      <div *ngIf="jobData" class="p-3 job-content">
         <h5 class="highlight-black-text">{{jobData.job.jobheading}}</h5>
 
         <p class="highlight-text">{{jobData.job.userInfo.other_details.c_name}}</p>
@@ -13,7 +13,7 @@
           </div>
           <div class="col-md-2">
             <i class="fas fa-dollar-sign highlight-text pr-1" aria-hidden="true"></i>
-            <span class="highlight-text">  {{jobData.job.salarypackage}}</span>
+            <span class="highlight-text"> {{jobData.job.salarypackage}}</span>
           </div>
           <div class="col-md-2">
             <i class="fa fa-map-marker highlight-text pr-1" aria-hidden="true"></i>
@@ -22,12 +22,12 @@
 
         </div>
 
-        <div *ngIf = "!getUsertype()" class="row p-2">
+        <div *ngIf="!getUsertype()" class="row p-2">
           <button class="btn btn-primary" type="button" name="button" (click)="editJob(jobData.job._id)">Edit Job</button>&nbsp;
           <button class="btn btn-danger" type="button" name="button" (click)="deleteMethod(jobData.job._id)">Delete</button>&nbsp;
         </div>
 
-        <div *ngIf = "getUsertype()" class="row p-2">
+        <div *ngIf="getUsertype()" class="row p-2">
           <button *ngIf="!isApplied" class="btn btn-primary" type="button" name="button" (click)="applyJob(jobData.job._id)">Apply for this Job</button>&nbsp;
           <button *ngIf="isApplied" class="btn btn-success" type="button" name="button">Applied</button>&nbsp;
         </div>
@@ -40,22 +40,25 @@
           <p class="highlight-text">{{jobData.job.keyskills}}</p>
 
           <h6 class="highlight-black-text">Contact Information</h6>
-          <p class="highlight-text">{{jobData.job.userInfo.other_details.designation}}, {{jobData.job.userInfo.username}}, {{jobData.job.userInfo.email}},
-{{jobData.job.userInfo.other_details.c_name}}, {{jobData.job.userInfo.other_details.c_address}} , {{jobData.job.userInfo.other_details.mobile}},
-{{jobData.job.userInfo.other_details.c_email}}
-
-           </p>
+          <p class="highlight-text">
+            <span *ngIf="jobData.job.userInfo.other_details.designation">{{jobData.job.userInfo.other_details.designation}}<br></span>
+            <span *ngIf="jobData.job.userInfo.username">{{jobData.job.userInfo.username}}<br></span>
+            <span *ngIf="jobData.job.userInfo.email">{{jobData.job.userInfo.email}}<br></span>
+            <span *ngIf="jobData.job.userInfo.other_details.c_name">{{jobData.job.userInfo.other_details.c_name}}<br></span>
+            <span *ngIf="jobData.job.userInfo.other_details.c_address">{{jobData.job.userInfo.other_details.c_address}}<br></span>
+            <span *ngIf="jobData.job.userInfo.other_details.mobile">{{jobData.job.userInfo.other_details.mobile}}<br></span>
+            <span *ngIf="jobData.job.userInfo.other_details.c_email">{{jobData.job.userInfo.other_details.c_email}}</span>
+          </p>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="p-3 job-content" *ngIf = "appliedUser">
-          <ul *ngFor = "let user of appliedUser">
-              <li >
-                {{user.username}}
-                {{user.email}}
-              </li>
-          </ul>
-      </div>
+  <div class="mt-2 mb-2" *ngIf="appliedUser && appliedUser.length > 0">
+    <h5 class="pt-3 pb-3">User applied for this Job</h5>
+    <div class="p-3 mb-1 job-content" *ngFor="let user of appliedUser">
+      <h6 class="highlight-black-text">{{user.username}}</h6><br>
+      <p class="highlight-text">{{user.email}}</p>
     </div>
   </div>
 </div>
